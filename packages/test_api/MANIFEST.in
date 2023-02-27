@@ -1,0 +1,2 @@
+include *.rst *.txt LICENSE
+include galaxy_test/api/*.yml
