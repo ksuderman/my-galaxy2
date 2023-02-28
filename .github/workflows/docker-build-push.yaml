@@ -34,7 +34,7 @@ jobs:
         run: |
           code=$(/usr/bin/curl -s -w "%{http_code}" -o /dev/null https://hub.docker.com/v2/repositories/${{ github.repository_owner }}/galaxy-min/tags/${{ steps.branch.outputs.name }})
           if [[ $code == 200 ]] ; then
-            echo "Release image exists. Skipping the Docker build.
+            echo "Release image exists. Skipping the Docker build."
             exit 1
           fi
 
