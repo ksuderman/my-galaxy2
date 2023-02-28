@@ -23,8 +23,14 @@ jobs:
         id: branch
         run: echo "name=$(echo ${{ github.ref_name }} | sed 's/release_//')" >> $GITHUB_OUTPUT
 
+      - name: Print the github.ref
+        run: echo "github.ref is ${{ github.ref }}"
+
+      - name: Print the github.ref_name
+        run: echo "github.ref_name is ${{ github.ref_name }}"
+
       - name: Don't build and push release_* images if the image already exists
-        if: contains('refs/heads/release_', github.ref)
+        if: contains('release_', github.ref_name)
         run: |
           code=$(/usr/bin/curl -s -w "%{http_code}" -o /dev/null https://hub.docker.com/v2/repositories/${{ github.repository_owner }}/galaxy-min/tags/${{ steps.branch.outputs.name }})
           if [[ $code == 200 ]] ; then
