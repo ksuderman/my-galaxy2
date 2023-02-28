@@ -30,7 +30,7 @@ jobs:
         run: echo "github.ref_name is ${{ github.ref_name }}"
 
       - name: Don't build and push release_* images if the image already exists
-        if: contains('release_', github.ref_name)
+        if: contains(github.ref_name, 'release_')
         run: |
           code=$(/usr/bin/curl -s -w "%{http_code}" -o /dev/null https://hub.docker.com/v2/repositories/${{ github.repository_owner }}/galaxy-min/tags/${{ steps.branch.outputs.name }})
           if [[ $code == 200 ]] ; then
