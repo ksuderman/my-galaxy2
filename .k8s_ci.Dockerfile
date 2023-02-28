@@ -97,7 +97,7 @@ RUN find . -name "node_modules" -type d -prune -exec rm -rf '{}' +
 FROM stage1 AS client_build
 ARG SERVER_DIR
 
-RUN ansible-playbook -i localhost, playbook.yml -v --tags "galaxy_build_client" -e galaxy_virtualenv_command=virtualenv
+RUN ansible-playbook -i localhost, playbook.yml -v --tags "galaxy_build_client" -e galaxy_virtualenv_command=virtualenv -e galaxy_client_make_target=client
 
 WORKDIR $SERVER_DIR
 RUN rm -rf \
